@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <head>
+    <!-- Añade esto en la sección <head> de tu archivo HTML -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Películas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: white;
+        }
+
+        header {
+            background-color: #000;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        nav ul li {
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li:hover {
+            color: white;
+        }
+
+        nav ul li.active {
+            color: white;
+            font-weight: bold;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 100px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .movie {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .movie img {
+            width: 100%;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .movie:hover img {
+            transform: scale(0.0);
+        }
+
+        .movie p {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #f0f0f0;
+        }
+
+        .movie:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Modal para mostrar detalles de las películas */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding-top: 5px;
+        }
+
+        .modal-content {
+            background-color: #1c1c1c;
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 700px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Estilo del póster con borde neón */
+        .modal-content img {
+            width: 60%;
+            max-width: 300px;
+            border-radius: 12px;
+            border: 2px solid #FF0000; /* Borde rojo */
+            box-shadow: 0 0 20px #FF0000, 0 0 40px #000000, 0 0 60px #FF000000; /* Efecto neón */
+            transition: all 0.3s ease; /* Transición suave */
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+        }
+
+        .info h2 {
+            margin-top: 20px;
+            font-size: 26px;
+        }
+
+        .info p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .info .link {
+            color: #FF0000;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        @media (max-width: 1024px) {
+            .movie-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .movie-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 5px;
+                padding: 10px 10px 20px;
+                margin-top: 60px;
+            }
+
+            .modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ANIMADAS</h1>
+        <nav>
+            <ul></ul>
+        </nav>
+    </header>
+
+    <div class="movie-grid">
+        <!-- Animadas-->
+        <div class="movie" data-category="NO EDITAR" data-title="Garfield: La película" data-year="2024" data-genre="Animación, Comedia, Familia, Aventura, Acción" data-duration="1h 43 mins" data-synopsis="El mundialmente famoso Garfield, el gato casero que odia los lunes y que adora la lasaña, está a punto de vivir una aventura ¡en el salvaje mundo exterior! Tras una inesperada reunión con su largamente perdido padre – el desaliñado gato callejero Vic – Garfield y su amigo canino Odie se ven forzados a abandonar sus perfectas y consentidas vidas al unirse a Vic en un hilarante y muy arriesgado atraco." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL3hzb2VxcmNra2pxcQ==">
+    <img src="https://image.tmdb.org/t/p/original/p6AbOJvMQhBmffd0PIv0u8ghWeY.jpg" alt="Garfield: La película">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Elemental" data-year="2023" data-genre="Animación, Comedia, Familia, Fantasía, Romance" data-duration="1h 41 mins" data-synopsis="En una ciudad donde los residentes del fuego, el agua, la tierra y el aire viven juntos, una joven apasionada y un chico que se deja llevar por la corriente descubrirán algo elemental: cuánto tienen en común." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lLzN2MjBheWYxeXJzZA==">
+    <img src="https://image.tmdb.org/t/p/original/4Y1WNkd88JXmGfhtWR7dmDAo1T2.jpg" alt="Elemental">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Migration" data-year="2023" data-genre="Animación, Acción, Aventura, Comedia, Familia" data-duration="1h 22 mins" data-synopsis="La familia Mallard se ha quedado 'estancada'. Mientras papá Mack se siente realizado cuidando de su familia en su estanque de Nueva Inglaterra, mamá Pam se muere de ganas de vivir la vida y hacer descubrir a sus hijos –el adolescente Dax y la patita Gwen– el mundo en toda su amplitud. Después de que una familia de patos migratorios llegue a su estanque con maravillosas historias de lugares lejanos, Pam consigue convencer a Mack de que deben viajar a la tropical Jamaica pasando por Nueva York. Los Mallard emprenden el viaje hacia el sur para pasar el invierno, pero nada sale como estaba previsto. La experiencia les ayudará a descubrir horizontes desconocidos, a hacer nuevos amigos, a vivir experiencias que jamás imaginaron, y de paso, a conocerse mejor." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2djdGg0MHFoNjQ0Ng==">
+    <img src="https://image.tmdb.org/t/p/original/ldfCF9RhR40mppkzmftxapaHeTo.jpg" alt="Migration">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Super Mario Bros: La película" data-year="2023" data-genre="Animación, Familia, Aventura, Fantasía, Comedia" data-duration="1h 32 mins" data-synopsis="Mientras trabajan en una avería subterránea, los fontaneros de Brooklyn, Mario y su hermano Luigi, viajan por una misteriosa tubería hasta un nuevo mundo mágico. Pero, cuando los hermanos se separan, Mario deberá emprender una épica misión para encontrar a Luigi." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL3F3OGF0ZjNxOWh6NQ==">
+    <img src="https://image.tmdb.org/t/p/original/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="Super Mario Bros: La película">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Turning Red" data-year="2022" data-genre="Animación, Familia, Comedia, Fantasía" data-duration="1h 39 mins" data-synopsis="Mei Lee, una niña de 13 años un poco rara pero segura de sí misma, se debate entre ser la hija obediente que su madre quiere que sea y el caos propio de la adolescencia. Ming, su protectora y ligeramente exigente madre, no se separa nunca de ella lo que es una situación poco deseable para una adolescente. Y por si los cambios en su vida y en su cuerpo no fueran suficientes, cada vez que se emociona demasiado (lo que le ocurre prácticamente todo el tiempo), se convierte en un panda rojo gigante." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2h5ZzMwdDJwdjlkMQ==">
+    <img src="https://image.tmdb.org/t/p/original/qsdjk9oAKSQMWs0Vt5Pyfh6O4GZ.jpg" alt="Turning Red">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Tom y Jerry" data-year="2021" data-genre="Comedia, Familia, Animación" data-duration="1h 41 mins" data-synopsis="Tom el gato y Jerry el ratón son expulsados de su casa y se trasladan a un elegante hotel de Nueva York, donde una empleada descuidada llamada Kayla perderá su trabajo si no puede desalojar a Jerry antes de una boda de clase alta en el hotel. ¿Su solución? Contratar a Tom para deshacerse del molesto ratón." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL29lOW9pbHFjam1naw==">
+    <img src="https://image.tmdb.org/t/p/original/8XZI9QZ7Pm3fVkigWJPbrXCMzjq.jpg" alt="Tom y Jerry">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Leo" data-year="2023" data-genre="Animación, Comedia, Familia" data-duration="1h 46 mins" data-synopsis="Leo (Sandler) es un lagarto de 74 años que lleva atrapado en el mismo aula de Florida durante décadas con su compañera de terrario, una tortuga (Bill Burr). Cuando se entera de que solo le queda un año de vida, Leo planea escapar para experimentar la vida en el exterior, pero entonces comienzan sus problemas." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2V5MDNwd2YzdDJteQ==">
+    <img src="https://image.tmdb.org/t/p/original/pD6sL4vntUOXHmuvJPPZAgvyfd9.jpg" alt="Leo">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Ratatouille" data-year="2007" data-genre="Animación, Comedia, Familia, Fantasía" data-duration="1h 50 mins" data-synopsis="Remy es una simpática rata que sueña con convertirse en un gran chef francés a pesar de la oposición de su familia y del problema evidente que supone ser una rata en una profesión que detesta a los roedores. El destino lleva entonces a Remy a las alcantarillas de París, pero su situación no podría ser mejor, ya que se encuentra justo debajo de un restaurante que se ha hecho famoso gracias a Auguste Gusteau, una estrella de la cuisine. A pesar del peligro que representa ser un visitante poco común (y desde luego nada deseado) en los fogones de un exquisito restaurante francés, la pasión de Remy por la cocina pone patas arriba el mundo culinario parisino en una trepidante y emocionante aventura." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2pucnUycHJlNHl5ag==">
+    <img src="https://image.tmdb.org/t/p/original/t3vaWRPSf6WjDSamIkKDs1iQWna.jpg" alt="Ratatouille">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Soul" data-year="2020" data-genre="Animación, Familia, Comedia, Fantasía" data-duration="1h 40 mins" data-synopsis=" ¿Alguna vez te has preguntado de dónde provienen tu pasión, tus sueños y tus intereses? ¿Qué es lo que te hace ser... tú? Viaja desde las calles de Nueva York a los reinos cósmicos para descubrir las respuestas a las preguntas más importantes de la vida." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lLzhudGdrZmU2cDM5dA==">
+    <img src="https://image.tmdb.org/t/p/original/eAi5NjSqxfZCy9mZ9NH6bus2my6.jpg" alt="Soul">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Lorax" data-year="2012" data-genre="Animación, Familia" data-duration="1h 26 mins" data-synopsis="Un chico se propone conquistar el afecto de la chica de sus sueños. Para conseguirlo, debe averiguar la historia del Lorax, una encantadora aunque gruñona criatura que lucha por proteger un mundo en vías de extinción." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL3VwdG55NGI1amZndA==">
+    <img src="https://image.tmdb.org/t/p/original/tePFnZFw5JvjwjQjaKkqDPNMLPU.jpg" alt="Lorax"
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Turbo" data-year="2013" data-genre="Animación, Familia" data-duration="1h 35 mins" data-synopsis="Turbo es un caracol de jardín con un sueño imposible: convertirse en el caracol más rápido del mundo. Cuando un extraño accidente le da el poder de la súper-velocidad, Turbo intentará cumplir su sueño. Primero se hará amigo de una peculiar pandilla de caracoles callejeros tuneados y obsesionados con la velocidad, y allí Turbo aprenderá que nadie llega a tener éxito por sí solo. Así que coloca su corazón y su concha en la línea de salida dispuesto a ayudar a sus colegas a lograr sus sueños, antes de intentar alcanzar su sueño imposible: ganar las 500 millas de Indianápolis." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2tyY25rZHpvaGo3cQ==">
+    <img src="https://image.tmdb.org/t/p/original/tN4bjzZ3ePY57hpCTFk0Kc3oXAw.jpg" alt="Turbo">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Wall-E" data-year="2008" data-genre="Animación, Familia, Ciencia ficción" data-duration="1h 37 mins" data-synopsis="En un futuro lejano, un pequeño robot recolector de residuos se embarca inadvertidamente en un viaje espacial que decidirá en última instancia el destino de la humanidad." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL295b2s1a201dXp5cQ==">
+    <img src="https://image.tmdb.org/t/p/original/fLXLNDsOBZxpNleWF9Z4hubxBUQ.jpg" alt="Wall-E">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="La fiesta de las salchichas" data-year="2016" data-genre="Aventura, Animación, Comedia, Fantasía" data-duration="1h 28 mins" data-synopsis="La trama sigue el drama de una salchicha y sus amigos, otros productos de supermercado, cuando descubren que serán brutalmente asesinados al llegar a casa de sus compradores. Es entonces que necesitan encontrar una manera de regresar al supermercado y avisar a sus amigos de lo que realmente sucede con la comida." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL3ViYWo4cWtsZjA4eg==">
+    <img src="https://image.tmdb.org/t/p/original/4YiHAxavhMLaBqOzx7ZirmOwNkD.jpg" alt="La fiesta de las salchichas">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Un gato con suerte" data-year="2024" data-genre="Animación, Comedia, Familia, Fantasía" data-duration="1h 27 mins" data-synopsis="Beckett es un gato mimado y egoísta que da por sentada la suerte que le ha tocado. Sin embargo, todo eso está a punto de cambiar cuando pierde por descuido su novena vida. Ante lo inevitable, suplica que le permitan volver a su vida perfecta." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2ppNTlnNzJweW94cQ==">
+    <img src="https://image.tmdb.org/t/p/original/qGLnbmNnOAI1IgjtWdfVWnJkGku.jpg" alt="Un gato con suerte">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Lightyear" data-year="2022" data-genre="Animación, Ciencia ficción, Familia, Aventura" data-duration="1h 45 mins" data-synopsis="Atrapado en un planeta hostil a 4,2 millones de años luz de la Tierra junto a su comandante y su tripulación, Buzz Lightyear intenta encontrar la manera de volver a casa a través del espacio y el tiempo. Pero la llegada de Zurg, una presencia imponente con un ejército de robots despiadados y una agenda misteriosa, complica aún más las cosas y pone en peligro la misión." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL2xtOG5rN2FmeTg1dQ==">
+    <img src="https://image.tmdb.org/t/p/original/8qHwlezCZzOhq88mnpeqK4asz4n.jpg" alt="Lightyear">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Luca" data-year="2021" data-genre="Animación, Comedia, Fantasía, Aventura, Familia" data-duration="1h 35 mins" data-synopsis="Ambientada en un precioso pueblo costero de la Riviera italiana, narra la historia sobre el paso a la edad adulta de un chico que vive un verano inolvidable lleno de helados, pasta e infinitos paseos en scooter. Luca comparte estas aventuras con su nuevo mejor amigo, pero toda la diversión se ve amenazada por un secreto muy profundo: él es un monstruo marino de un mundo que yace bajo la superficie del agua." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL211emR2eGJ6aHNxOQ==">
+    <img src="https://image.tmdb.org/t/p/original/9x4i9uKGXt8IiiIF5Ey0DIoY738.jpg" alt="Luca">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="El Grinch" data-year="2018" data-genre="Animación, Familia, Comedia, Fantasía" data-duration="1h 25 mins" data-synopsis="El Grinch, la película de animación basada en el popular clásico navideño del Dr. Seuss, cuenta la historia de un cínico cascarrabias que se propone robar la Navidad hasta que el desbordante espíritu navideño de una niña le hace cambiar de opinión. Divertida, enternecedora y visualmente impactante, se trata de una historia universal sobre el indómito poder del optimismo." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL3BueWY5Z24xNHVreg==">
+    <img src="https://image.tmdb.org/t/p/original/eCHNCoat9L0Q3p4XjBQqV2Zn7Ux.jpg" alt="El Grinch">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Trasto" data-year="2019" data-genre="Animación, Aventura, Familia, Comedia, Música" data-duration="1h 27 mins" data-synopsis="Trasto es un perro que vive con todo lujos y sin ninguna complicación junto a su rica dueña, pero cuando esta fallece el perro tendrá que aprender a vivir sin ninguno de los lujos a los que está acostumbrado. Sin dinero y fuera de la mansión donde siempre había vivido, Trasto tiene que hacer frente a los peligros de la calle hasta que su camino se cruza con Zoe, una joven que lo acoge en su casa. Sin embargo, la tranquilidad no llega para Trasto cuando tiene que evitar ser atrapado por los codiciosos sobrinos de su antigua dueña, que le necesitan para cobrar la herencia que su antigua dueña le había dejado íntegramente a Trasto." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9wbGF5ZXJ3aXnoLmNvbS9lL3lkYmJ2bDMxMGJoaQ==">
+    <img src="https://image.tmdb.org/t/p/original/kbeVZtX9HcsrkSyF0KrB4odkkiM.jpg" alt="Trasto">
+    <p></p>
+</div>
+<div class="movie" data-category="Animación" data-title="Robot Salvaje" data-year="2024" data-genre="Animación, Ciencia ficción, Familia" data-duration="1h 41 mins" data-synopsis="El épico viaje de un robot -la unidad 7134 de Roz,'Roz' para abreviar- que naufraga en una isla deshabitada y debe aprender a adaptarse al duro entorno, entablando gradualmente relaciones con los animales de la isla y convirtiéndose en padre adoptivo de un pequeño ganso huérfano." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL25qdWt4NGQ5ZTZlbg==">
+    <img src="https://image.tmdb.org/t/p/original/9w0Vh9eizfBXrcomiaFWTIPdboo.jpg" alt="Robot Salvaje">
+    <p></p>
+</div>
+<div class="movie" data-category="Drama" data-title="Inseparables" data-year="2023" data-genre="Animación, Aventura, Comedia, Familia" data-duration="1h 28 mins" data-synopsis="Un títere de Don Quijote fugitivo con una imaginación ilimitada, y DJ Doggy Dog, un peluche abandonado que necesita un amigo, cruzarán sus caminos en Central Park y se unirán contra viento y marea para una épica aventura de amistad en la ciudad de Nueva York." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3AzZjc0eTJ0a3o0MQ==">
+    <img src="https://image.tmdb.org/t/p/original/dmftU2Rnmv9KTteMUwjalOuZHke.jpg" alt="Inseparables">
+    <p></p>
+</div>
+<div class="movie" data-category="Infantil" data-title="Telma la unicornio" data-year="2024" data-genre="Animación, Fantasía, Familia" data-duration="1h 38 mins" data-synopsis="Una poni cantante que sueña con el estrellato salta a la fama al transformarse en una brillante unicornio, pero el camino de la popularidad será toda una aventura." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3JiOTl4bWZwa3E5Yg==">
+    <img src="https://image.tmdb.org/t/p/original/yutiEZ7taGDNau2jGjKIdDwQpDw.jpg" alt="Telma la unicornio">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Cigüeñas" data-year="2016" data-genre="Aventura, Animación, Comedia, Familia" data-duration="1h 26 mins" data-synopsis="En Montaña Cigüeña, viven las cigüeñas que hace tiempo enviaban bebés a los padres de todo el mundo. Ahora distribuyen los paquetes de una compañía mundial de Internet. Junior, la mejor cigüeña repartidora de la compañía, está a punto de conseguir un ascenso, pero accidentalemete activa la Máquina de Producción de Bebés y el resultado es una adorable niña ilegal. Para evitar que su jefe se entere, Junior y su amiga Tulip, el único ser humano de Montaña Cigüeña, se apresuran a entregar el bebé en un viaje salvaje que podría afectar a la integridad de más de una familia y restablecer la verdadera misión de las cigüeñas en el mundo. Debut en el largometraje de Doug Sweetland, responsable del corto de Pixar (Presto) (2008)." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3V6dWZsNDY2djV6OA==">
+    <img src="https://image.tmdb.org/t/p/original/eEyLLrcUAvmAn6OoZwEvzCUG6Z6.jpg" alt="Cigüeñas">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="El rey león" data-year="2019" data-genre="Animación, Aventura, Drama, Familia" data-duration="1h 58 mins" data-synopsis="Simba es el hijo del rey de los leones, Mufasa, y heredero de todo el reino. Pero cuando su padre es brutalmente asesinado por su tío Scar, decidirá huir, dejando vía libre para que su tío tome el puesto de su padre como líder de la manada. En su camino, Simba se encuentra con el suricato Timón y el jabalí Pumba, que le enseñarán a vivir la vida sin preocupaciones. Pero el joven león se verá obligado a decidir entre su vida libre de problemas o su destino como rey ." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL204M3R0N2M1MW12Zw==">
+    <img src="https://image.tmdb.org/t/p/original/pSfwXxP94xktZKn3UaeVe6VdFZl.jpg" alt="El rey león">
+    <p></p>
+</div>
+<div class="movie" data-category="NO EDITAR" data-title="Transformers One" data-year="2024" data-genre="Animación, Ciencia ficción, Aventura, Familia, Acción" data-duration="1h 44 mins" data-synopsis="La historia jamás contada del origen de Optimus Prime y Megatron y de cómo pasaron de ser hermanos de armas que cambiaron el destino de Cybertron para siempre, a convertirse en enemigos acérrimos." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2trczJkaTVhZjNxbA==">
+    <img src="https://image.tmdb.org/t/p/original/qrwI2T844nrBUv3eDwQZRDdgSFs.jpg" alt="Transformers One">
+    <p></p>
+</div>
+<div class="movie" data-category="Animada" data-title="Mavka: Guardiana del bosque" data-year="2023" data-genre="Animación, Aventura, Familia, Fantasía" data-duration="1h 39 mins" data-synopsis="Mavka, un Alma del Bosque y su Guardián, se enfrenta a una elección imposible entre el amor y su deber como guardiana del Corazón del Bosque, cuando se enamora de un humano: el talentoso joven músico Lukas." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3hsZjczbDhzb2FucA==">
+    <img src="https://image.tmdb.org/t/p/original/eeJjd9JU2Mdj9d7nWRFLWlrcExi.jpg" alt="Mavka: Guardiana del bosque">
+    <p></p>
+</div>
+<div class="movie" data-category="Animada" data-title="Wish: El poder de los deseos" data-year="2023" data-genre="Animación, Familia, Fantasía, Aventura" data-duration="1h 34 mins" data-synopsis="Asha y una pequeña bola de energía ilimitada llamada Star demuestran que cuando la voluntad de un ser humano valiente se conecta con la magia de las estrellas, pueden suceder cosas maravillosas." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3Rhcm94YXF6c2Jkbw==">
+    <img src="https://image.tmdb.org/t/p/original/vgJZSqKMXWDDx09iSIStGKfHMku.jpg" alt="Wish: El poder de los deseos">
+    <p></p>
+</div>
+<div class="movie" data-category="Animada" data-title="Ultraman: El ascenso" data-year="2023" data-genre="Animación, Ciencia ficción, Familia, Acción" data-duration="2h 1 mins" data-synopsis="Una estrella del deporte vuelve a casa a regañadientes para seguir los pasos de su padre y convertirse en Ultraman, el héroe encargado de proteger Tokio de unos monstruos gigantes." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2ZuOHpsM2tqdnpyYg==">
+    <img src="https://image.tmdb.org/t/p/original/j886YEkIUsiImY53px5VHKD4lRa.jpg" alt="Ultraman: El ascenso">
+    <p></p>
+</div>
+<div class="movie" data-title="Bob Esponja: Campamento de Terror" data-year="2024" data-genre="Película de TV, Familia, Comedia, Terror, Animación" data-duration="45 mins" data-synopsis="Mientras están en Kamp Koral por un reencuentro, Bob Esponja y la pandilla son acechados por una figura misteriosa que acecha en la oscuridady se los llevan uno por uno." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2htNmhtbTVrOWZwNw==">
+    <img src="https://image.tmdb.org/t/p/original/blRsgsexoBqnjcEJkV8beKAVT6J.jpg" alt="SPONGEBOB SQUAREPANTS: KREEPAWAY KAMP">
+    <p></p>
+</div>
+<div class="movie" data-title="El Rey Mono" data-year="2023" data-genre="Animación, Fantasía, Aventura, Familia, Comedia" data-duration="1h 36 mins" data-synopsis="Un mono y su vara mágica unen fuerzas en una épica aventura en la que se enfrentan a demonios, dragones, dioses y al peor de los adversarios: ¡el mismísimo ego del mono!" data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lLzVubHJ3cTY5MTJ6Zw==">
+    <img src="https://image.tmdb.org/t/p/original/i6ye8ueFhVE5pXatgyRrZ83LBD8.jpg" alt="El rey mono">
+    <p></p>
+</div>
+<div class="movie" data-title="Los Buscamundos" data-year="2021" data-genre="Animación, Familia, Comedia" data-duration="1h 22 mins" data-synopsis="Passepartout, un mono ingenuo pero vivaz, siempre ha soñado con emprender una aventura. La oportunidad viene en forma de Phileas Frog, un exploradora la vez que estafador, y una apuesta multimillonaria: establecer un nuevo récord para una gira por el mundo. Desde desiertos ardientes hasta selvas misteriosas, desde princesas intrépidas hasta langostas adoradoras de volcanes, Passepartout descubrirá lo increíble, maravilloso y loco que es el mundo." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lLzRnZGJiOXFpZTNweA==">
+    <img src="https://image.tmdb.org/t/p/original/dZxTpWEA8JIohoksXgM0Xl8DaE6.jpg" alt="Los buscamundos">
+    <p></p>
+</div>
+<div class="movie" data-title="Mascotas en apuros" data-year="2024" data-genre="Animación, Aventura, Comedia, Familia" data-duration="1h 27 mins" data-synopsis="Gracie y Pedro, enemigos de la familia, deben dejar de lado sus diferencias y embarcarse en una emocionante búsqueda llena de peligrosas aventuras para poder reunirse con sus dueños. " data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS90ZmtvcmNsOWx6NGo=">
+    <img src="https://image.tmdb.org/t/p/original/wuB4CVY3OgH4yVwj1CrS9hUYEje.jpg" alt="Mascotas en apuros">
+    <p></p>
+</div>
+<div class="movie" data-title="Pinocho de Guillermo del Toro" data-year="2022" data-genre="Animación, Fantasía, Drama" data-duration="2h 1 mins" data-synopsis="Versión musical en animación stop motion del famoso cuento de 'Pinocho', ambientada en la Italia fascista, durante la década de 1930." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS91aHloa3l0YzB4bGs=">
+    <img src="https://image.tmdb.org/t/p/original/zMohnoczN1OKoim0XETqntbh5vc.jpg" alt="Pinocho de Guillermo del Toro">
+    <p></p>
+</div>
+<div class="movie" data-title="Entergalactic" data-year="2022" data-genre="Animación, Romance, Música" data-duration="1h 34 mins" data-synopsis="Sigue la historia de dos jóvenes artistas que navegan por los giros y vueltas de encontrar el amor en la ciudad de Nueva York." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9ibGxnZmN3NG1tbGU=">
+    <img src="https://image.tmdb.org/t/p/original/cfXbwPWwlmMhC45asWxCWq3Utwa.jpg" alt="Entergalactic">
+    <p></p>
+</div>
+<div class="movie" data-title="Emoji: La película" data-year="2017" data-genre="Animación, Familia, Comedia" data-duration="1h 25 mins" data-synopsis="Los protagonistas habitarán la misteriosa tierra de Textopolis, donde todos los emojis favoritos de la gente cobran vida, mientras esperan ser seleccionados por el usuario del teléfono. Todos los personajes tienen una sola expresión facial a excepción de Gen, un emoji que nació sin filtro y se llena de múltiples expresiones. Para lograr ser normal, Gen se embarcará en una aventura o “app-ventura”, junto a sus amigos Hi-5 y Jailbreak. Pero pronto, una gran amenaza hará que el destino de estos personajes dependa de los tres amigos, teniendo que salvar su mundo antes que sea borrado por completo." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS84anY1a2Z1NXN2emU=">
+    <img src="https://image.tmdb.org/t/p/original/60bTx5z9zL1AqCjZ0gmWoRMJ6Bb.jpg" alt="Emoji: La película">
+    <p></p>
+</div>
+<div class="movie" data-title="Home: Hogar dulce hogar" data-year="2015" data-genre="Fantasía, Comedia, Animación, Ciencia ficción, Familia" data-duration="1h 33 mins" data-synopsis="Un grupo de pacíficos alienígenas se encuentran huyendo de sus enemigos, y deciden esconderse de ellos en la Tierra. Sin embargo, uno de estos humildes extraterrestres accidentalmente notifica a sus perseguidores cuál es su ubicación, y no le queda más remedio que huir junto con una chica adolescente." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9uZm1kbXYxbHp4Ymg=">
+    <img src="https://image.tmdb.org/t/p/original/DOrcBaWj0sfQKaQ88WsYOliK9d.jpg" alt="Home: Hogar dulce hogar">
+    <p></p>
+</div>
+<div class="movie" data-title="Las aventuras de Peabody y Sherman" data-year="2014" data-genre="Animación, Aventura, Familia" data-duration="1h 32 mins" data-synopsis="Los personajes de la serie animada de los 60 The Rocky & Bullwinkle Show, Mr. Peabody y Sherman, se cuelan en la gran pantalla adquiriendo una nueva dimensión 3D. En esta ocasión el perro parlante más inteligente del mundo, Mr. Peabody y su mascota Sherman, un enérgico niño bastante ingenuo, se adentrarán en nueva una aventura determinante en el curso de la historia universal. Cuando Sherman desastrosamente avería la máquina del tiempo, la peculiar pareja se ve obligada a recomponer los hechos y arreglar la máquina antes de que sea demasiado tarde y el continuo espacio-tiempo se destruya afectando irreparablemente a nuestra existencia." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS84bXczZjE1cmJzMzI=">
+    <img src="https://image.tmdb.org/t/p/original/hPcImYndWESKHzT2GHVCDsUxzYg.jpg" alt="Las aventuras de Peabody y Sherman">
+    <p></p>
+</div>
+<div class="movie" data-title="Piece by Piece" data-year="2024" data-genre="Animación, Música, Documental" data-duration="1h 33 mins" data-synopsis="Sigue esta autobiografía en la que Pharrell Williams muestra su proceso imaginativo y creativo utilizando Lego, a medida que construye modelos de Lego que representan su desarrollo artístico. Cada construcción refleja un hito creativo diferente." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2xtdmVmdzRnanJrbA==">
+    <img src="https://image.tmdb.org/t/p/original/9xSjP8B0iZHRzvrtKcYDkaalomS.jpg" alt="Piece by Piece">
+    <p></p>
+</div>
+<div class="movie" data-title="Bajo el muelle" data-year="2023" data-genre="Animación, Comedia, Familia, Romance" data-duration="1h 26 mins" data-synopsis="La comedia musical sigue a los cangrejos ermitaños que viven bajo el paseo marítimo de la costa de Jersey. Cuando Armen (un habitante de la ciudad cangrejo de tierra) se enamora de Ramona (una turista cangrejo de mar), aumentan las tensiones entre sus amigos y familias. Pero cuando una tormenta arroja al dúo lejos de casa, su amor les llevará a una aventura épica que unirá a la dividida comunidad." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzluZTN5amtmeTVibQ==">
+    <img src="https://image.tmdb.org/t/p/original/dYubl9T67KKgggQUawHs0xYMWEU.jpg" alt="Bajo el muelle">
+    <p></p>
+</div>
+<div class="movie" data-title="Luck" data-year="2022" data-genre="Animación, Aventura, Comedia, Fantasía" data-duration="1h 45 mins" data-synopsis="Sam Greenfield es la persona con menos suerte del mundo. Cuando de repente se encuentra en la desconocida Tierra de la Suerte, debe aliarse con los seres mágicos que la habitan para que su suerte cambie." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2luaG81OXJmN2YwZA==">
+    <img src="https://image.tmdb.org/t/p/original/1HOYvwGFioUFL58UVvDRG6beEDm.jpg" alt="Luck">
+    <p></p>
+</div>
+<div class="movie" data-title="Hechizados" data-year="2024" data-genre="Animación, Fantasía, Familia, Aventura, Comedia" data-duration="1h 50 mins" data-synopsis="Cuando un poderoso hechizo transforma a sus padres en unos monstruos gigantes, una joven princesa debe adentrarse en la naturaleza para romper la maldición antes de que sea tarde." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2IxYnMxbjh1dmR3OQ==">
+    <img src="https://image.tmdb.org/t/p/original/yzNvRMguCDcHnnUI661yNR1Ei9X.jpg" alt="Hechizados">
+    <p></p>
+</div>
+<div class="movie" data-title="Orión y la oscuridad" data-year="2024" data-genre="Animación, Familia, Comedia, Fantasía" data-duration="1h 32 mins" data-synopsis="Un niño muy imaginativo se enfrenta a sus miedos en un viaje inolvidable por la noche con su nuevo amigo Oscuridad, un ser enorme y sonriente." data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL213aDZ2NzVybTNnMQ==">
+    <img src="https://image.tmdb.org/t/p/original/k6iHs4daxm0RQqFQsE8oE5wWJjj.jpg" alt="Orión y la oscuridad">
+    <p></p>
+</div>
+<div class="movie" data-title="El Arca de Noé" data-year="2024" data-genre="Animación, Música, Comedia, Fantasía, Familia" data-duration="1h 35 mins" data-synopsis="Dos ratones: Vini, un carismático poeta con un terrible miedo escénico, y Tito, un talentoso y encantador guitarrista. Cuando llega el diluvio, solo se permite que un macho y una hembra de cada especie suban al Arca de Noé. Con la ayuda de una ingeniosa cucaracha y buena suerte, Vini y Tito se cuelan en el Arca y juntos intentarán evitar el enfrentamiento entre carnívoros y herbívoros. ¿Podrán estos talentosos polizones usar la música para romper la tensión y ayudar a todas las especies a convivir sin comerse unos a otros durante 40 días y 40 noches?" data-link="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2JvN2hvaHJpYWl0Nw==">
+    <img src="https://image.tmdb.org/t/p/original/fRaBjht3S1HU6lJrz2SoFwwOZQM.jpg" alt="El Arca de Noé">
+    <p></p>
+</div>
+
+
+
+        
+        
+        
+        <!-- Más películas aquí -->
+    </div>
+
+    <!-- Modal para mostrar detalles de las películas -->
+<div id="movieModal" class="modal">
+    <div class="modal-content">
+        <span class="close">×</span>
+        <img id="modalPoster" src="" alt="Poster">
+        <div class="info">
+            <h2 id="modalTitle"></h2>
+            <p><i class="fas fa-calendar"></i> <span id="modalYear"></span></p>
+            <p><i class="fas fa-film"></i> <span id="modalGenre"></span></p>
+            <p><i class="fas fa-clock"></i> <span id="modalDuration"></span></p>
+            <p><i class="fas fa-book"></i> <span id="modalSynopsis"></span></p>
+            <a id="modalLink" href="https://example.com" target="_blank" class="link">
+                <button style="background-color: #FF0000; color: white; padding: 10px 100px; border: 2px solid #FF4C4C; border-radius: 8px; cursor: pointer; transition: all 0.3s ease-in-out; box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); font-size: 16px; font-weight: bold; white-space: nowrap; overflow: hidden;">
+                    VER PELÍCULA
+                </button>
+            </a>
+        </div>
+    </div>
+</div>        
+
+    <script>
+        // Función para abrir el modal y mostrar los detalles de la película
+        function openModal(movie) {
+            const modal = document.getElementById('movieModal');
+            const title = movie.getAttribute('data-title');
+            const year = movie.getAttribute('data-year');
+            const genre = movie.getAttribute('data-genre');
+            const duration = movie.getAttribute('data-duration');
+            const synopsis = movie.getAttribute('data-synopsis');
+            const link = movie.getAttribute('data-link');
+            const posterSrc = movie.querySelector('img').src;
+
+            document.getElementById('modalPoster').src = posterSrc;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalYear').textContent = 'Año: ' + year;
+            document.getElementById('modalGenre').textContent = 'Género: ' + genre;
+            document.getElementById('modalDuration').textContent = 'Duración: ' + duration;
+            document.getElementById('modalSynopsis').textContent = synopsis;
+            document.getElementById('modalLink').href = link;
+
+            modal.style.display = 'block';
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            document.getElementById('movieModal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const movies = document.querySelectorAll('.movie');
+            const modalClose = document.querySelector('.close');
+
+            // Agregar el evento de clic a cada película
+            movies.forEach(movie => {
+                movie.addEventListener('click', function () {
+                    openModal(this);
+                });
+            });
+
+            // Cerrar el modal al hacer clic en la "x"
+            modalClose.addEventListener('click', closeModal);
+
+            // Cerrar el modal al hacer clic fuera del contenido
+            window.addEventListener('click', function (event) {
+                const modal = document.getElementById('movieModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
